@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Davlatov Asilbek — QA Manual Tester</title>
+    <meta name="description" content="Davlatov Asilbek — QA Manual Tester @ DeepSpace (Biznex.uz). Kafe va restoranlarni avtomatlashtiruvchi POS tizimining sifatini ta'minlayman. Python, Django, Web dasturlash.">
+    <meta property="og:title" content="Davlatov Asilbek — QA Manual Tester">
+    <meta property="og:description" content="DeepSpace — Biznex.uz'da QA Manual Tester. Kafe va restoranlar uchun POS tizimini test qilaman.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://davlatov-uz.vercel.app">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c6cff'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-size='44' font-family='Arial' font-weight='bold' text-anchor='middle' fill='white'%3EDA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Erta tema va til aniqlash — "flash" oldini olish uchun
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                document.documentElement.dataset.theme = t;
+                var l = localStorage.getItem('portfolio_lang');
+                if (l && ['uz', 'ru', 'en'].includes(l)) document.documentElement.lang = l;
+            } catch (e) { /* noop */ }
+        })();
+    </script>
+</head>
+<body>
+
+    <div class="bg-decor" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header class="navbar" id="navbar">
+        <div class="container nav-inner">
+            <a href="#home" class="logo">
+                <span class="logo-mark">DA</span>
+                <span class="logo-text">Davlatov<em>.uz</em></span>
+            </a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active" data-i18n="nav_home">Asosiy</a>
+                <a href="#about" class="nav-link" data-i18n="nav_about">Men haqimda</a>
+                <a href="#experience" class="nav-link" data-i18n="nav_exp">Tajriba</a>
+                <a href="#skills" class="nav-link" data-i18n="nav_skills">Ko'nikmalar</a>
+                <a href="#projects" class="nav-link" data-i18n="nav_projects">Loyihalar</a>
+                <a href="#contact" class="nav-link" data-i18n="nav_contact">Bog'lanish</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-btn" id="langBtn" aria-label="Tilni tanlash" title="Til / Язык / Language">
+                        <i class="fa-solid fa-globe"></i>
+                        <span id="currentLang">UZ</span>
+                        <i class="fa-solid fa-chevron-down lang-chevron"></i>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="lang-opt active" data-lang="uz">🇺🇿 O'zbekcha</button>
+                        <button class="lang-opt" data-lang="ru">🇷🇺 Русский</button>
+                        <button class="lang-opt" data-lang="en">🇬🇧 English</button>
+                    </div>
+                </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Mavzuni almashtirish" title="Dark / Light">
+                    <i class="fa-solid fa-sun sun-icon"></i>
+                    <i class="fa-solid fa-moon moon-icon"></i>
+                </button>
+                <button class="burger" id="burger" aria-label="Menyu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home" data-i18n="nav_home">Asosiy</a>
+            <a href="#about" data-i18n="nav_about">Men haqimda</a>
+            <a href="#experience" data-i18n="nav_exp">Tajriba</a>
+            <a href="#skills" data-i18n="nav_skills">Ko'nikmalar</a>
+            <a href="#projects" data-i18n="nav_projects">Loyihalar</a>
+            <a href="#contact" data-i18n="nav_contact">Bog'lanish</a>
+            <div class="mobile-lang-group">
+                <button class="mobile-lang-btn active" data-lang="uz">UZ</button>
+                <button class="mobile-lang-btn" data-lang="ru">RU</button>
+                <button class="mobile-lang-btn" data-lang="en">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============ HERO ============ -->
+        <section id="home" class="hero">
+            <div class="container hero-inner">
+                <div class="hero-left" data-reveal>
+                    <div class="status-pill">
+                        <span class="pulse-dot"></span>
+                        DeepSpace · Biznex.uz — QA jamoasida ishlayapman
+                    </div>
+                    <h1 class="hero-title">
+                        Davlatov <span class="grad-text">Asilbek</span>
+                    </h1>
+                    <div class="hero-role">
+                        <span class="mono-label">&gt;</span>
+                        <span id="typewriter"></span><span class="type-cursor">|</span>
+                    </div>
+                    <p class="hero-desc" data-i18n="hero_lead">DeepSpace kompaniyasida <strong>Biznex</strong> POS tizimining sifati uchun javobgar QA mutaxassisiman. Dasturlash poydevorim tufayli muammolarni tizimli tahlil qilaman va test avtomatlashtirish sari intilaman.</p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fa-solid fa-paper-plane"></i> <span data-i18n="btn_contact">Bog'lanish</span>
+                        </a>
+                        <a href="#projects" class="btn btn-ghost">
+                            <i class="fa-solid fa-folder-open"></i> <span data-i18n="btn_projects">Loyihalarim</span>
+                        </a>
+                        <a href="Davlatov_Asilbek_CV.pdf" download="Davlatov_Asilbek_CV.pdf" class="btn btn-ghost" id="downloadCv" title="CV-ni yuklab olish (PDF)">
+                            <i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="btn_cv">CV yuklab olish</span>
+                        </a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://www.linkedin.com/in/asilbek-davlatov-387408338" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://t.me/Asilbek68_80" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://github.com/asilbek006" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="mailto:dasilbek461@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                        <a href="tel:+998904126880" aria-label="Telefon"><i class="fa-solid fa-phone"></i></a>
+                    </div>
+                </div>
+
+                <div class="hero-right" data-reveal data-delay="150">
+                    <div class="terminal" id="qaTerminal">
+                        <div class="terminal-head">
+                            <span class="t-dot red"></span>
+                            <span class="t-dot yellow"></span>
+                            <span class="t-dot green"></span>
+                            <span class="t-title">asilbek@deepspace: ~/qa-suite</span>
+                        </div>
+                        <div class="terminal-body" id="terminalBody"></div>
+                    </div>
+                    <div class="float-chip chip-1">🐞 <span>Bug Hunter</span></div>
+                    <div class="float-chip chip-2">✅ <span>Quality First</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ STATS ============ -->
+        <section class="stats-band">
+            <div class="container stats-grid">
+                <div class="stat" data-reveal>
+                    <span class="stat-num"><span class="counter" data-target="5">0</span>+</span>
+                    <span class="stat-label" data-i18n="stat_exp_lbl">Oy QA tajribasi</span>
+                </div>
+                <div class="stat" data-reveal data-delay="80">
+                    <span class="stat-num"><span class="counter" data-target="10">0</span>+</span>
+                    <span class="stat-label" data-i18n="stat_proj_lbl">Muvaffaqiyatli loyiha</span>
+                </div>
+                <div class="stat" data-reveal data-delay="160">
+                    <span class="stat-num"><span class="counter" data-target="423">0</span></span>
+                    <span class="stat-label" data-i18n="stat_lessons_lbl">Darslik yozilgan</span>
+                </div>
+                <div class="stat" data-reveal data-delay="240">
+                    <span class="stat-num"><span class="counter" data-target="13">0</span>+</span>
+                    <span class="stat-label" data-i18n="stat_qual_lbl">Sifat va ishonchlilik</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ MARQUEE ============ -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>Manual Testing</span><i>✦</i><span>Test-Case Design</span><i>✦</i><span>Bug Reporting</span><i>✦</i><span>Regression</span><i>✦</i><span>Smoke Testing</span><i>✦</i><span>Exploratory</span><i>✦</i><span>POS Systems</span><i>✦</i><span>SDLC / STLC</span><i>✦</i><span>Agile</span><i>✦</i><span>UI Testing</span><i>✦</i>
+                <span>Manual Testing</span><i>✦</i><span>Test-Case Design</span><i>✦</i><span>Bug Reporting</span><i>✦</i><span>Regression</span><i>✦</i><span>Smoke Testing</span><i>✦</i><span>Exploratory</span><i>✦</i><span>POS Systems</span><i>✦</i><span>SDLC / STLC</span><i>✦</i><span>Agile</span><i>✦</i><span>UI Testing</span><i>✦</i>
+            </div>
+        </div>
+
+        <!-- ============ ABOUT ============ -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag" data-i18n="about_tag">// men haqimda</span>
+                    <h2 class="section-title" data-i18n="about_title">Kimman va <span class="grad-text">nima qilaman?</span></h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text" data-reveal>
+                        <p data-i18n="about_p1">
+                            Men <strong>Davlatov Asilbek</strong> — Muhammad al-Xorazmiy nomidagi TATU universitetining <strong>Kompyuter injiniring</strong> yo'nalishi 3-kurs talabasiman. IT sohasiga web dasturlashdan kirib kelganman: Python, Django, HTML/CSS/JS va ma'lumotlar bazalari bo'yicha mustahkam poydevorim bor.
+                        </p>
+                        <p data-i18n="about_p2">
+                            Bugun esa <strong>DeepSpace</strong> kompaniyasida <strong>QA Manual Tester</strong> sifatida faoliyat yuritaman. Jamoamiz kafe va restoranlar uchun <strong>Biznex</strong> POS tizimini ishlab chiqadi — men aynan shu mahsulotning sifati uchun javobgarman: har bir yangi funksiya mijozga yetib borishidan oldin mening qo'llarimdan o'tadi.
+                        </p>
+                        <p class="muted" data-i18n="about_p3">
+                            Dasturchilik tajribam menga test muhandisligida katta yordam beradi: tizim ichida nima sodir bo'layotganini tushunib, xatolarni tezroq va aniqroq lokalizatsiya qilaman.
+                        </p>
+                        <div class="qa-process" data-reveal>
+                            <h3 class="process-title" data-i18n="process_title">Mening test jarayonim</h3>
+                            <div class="process-steps">
+                                <div class="p-step"><span class="p-num">01</span><span data-i18n="p_step1">Talab tahlili</span></div>
+                                <div class="p-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+                                <div class="p-step"><span class="p-num">02</span><span data-i18n="p_step2">Test-case yozish</span></div>
+                                <div class="p-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+                                <div class="p-step"><span class="p-num">03</span><span data-i18n="p_step3">Testlash</span></div>
+                                <div class="p-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+                                <div class="p-step"><span class="p-num">04</span><span data-i18n="p_step4">Bug report</span></div>
+                                <div class="p-arrow"><i class="fa-solid fa-arrow-right-long"></i></div>
+                                <div class="p-step"><span class="p-num">05</span><span data-i18n="p_step5">Retest</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="about-card" data-reveal data-delay="150">
+                        <div class="monogram">DA</div>
+                        <ul class="fact-list">
+                            <li><i class="fa-solid fa-user"></i><div><strong data-i18n="fact_name_lbl">Ism</strong><span>Davlatov Asilbek</span></div></li>
+                            <li><i class="fa-solid fa-cake-candles"></i><div><strong data-i18n="fact_birth_lbl">Tug'ilgan</strong><span data-i18n="fact_birth_val">19-iyul 2006-yil</span></div></li>
+                            <li><i class="fa-solid fa-location-dot"></i><div><strong data-i18n="fact_loc_lbl">Manzil</strong><span data-i18n="fact_loc_val">Toshkent, O'zbekiston</span></div></li>
+                            <li><i class="fa-solid fa-graduation-cap"></i><div><strong data-i18n="fact_edu_lbl">Ta'lim</strong><span data-i18n="fact_edu_val">TATU — Kompyuter injiniring (3-kurs)</span></div></li>
+                            <li><i class="fa-solid fa-briefcase"></i><div><strong data-i18n="fact_role_lbl">Kasb</strong><span data-i18n="fact_role_val">QA Manual Tester</span></div></li>
+                            <li><i class="fa-solid fa-building"></i><div><strong data-i18n="fact_comp_lbl">Kompaniya</strong><span>DeepSpace — Biznex.uz</span></div></li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline w-full">
+                            <i class="fa-solid fa-comments"></i> <span data-i18n="btn_collab">Hamkorlikka ochiqman</span>
+                        </a>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ EXPERIENCE ============ -->
+        <section id="experience" class="section alt">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag" data-i18n="exp_tag">// tajriba</span>
+                    <h2 class="section-title" data-i18n="exp_title">Mening <span class="grad-text">yo'lim</span></h2>
+                </div>
+                <div class="timeline">
+                    <div class="t-item" data-reveal>
+                        <div class="t-dot-line"></div>
+                        <div class="t-card">
+                            <div class="t-head">
+                                <div class="t-company">
+                                    <span class="t-logo grad">DS</span>
+                                    <div>
+                                        <h3>QA Manual Tester</h3>
+                                        <span class="t-place">DeepSpace — <a href="https://biznex.uz" target="_blank" rel="noopener">Biznex.uz</a></span>
+                                    </div>
+                                </div>
+                                <span class="t-badge current" data-i18n="exp1_badge">2026-yul — hozirgacha</span>
+                            </div>
+                            <p class="t-desc" data-i18n="exp1_desc">
+                                Kafe va restoranlarni avtomatlashtiruvchi Biznex POS platformasining sifatini ta'minlayman. Mahsulot kassa, ombor, oshxona ekrani, hisobotlar va soliq integratsiyasini o'z ichiga oladi.
+                            </p>
+                            <ul class="t-list">
+                                <li data-i18n="exp1_l1">Yangi funksiyalarni test-keyslar asosida qo'lda testlash</li>
+                                <li data-i18n="exp1_l2">Xatolarni topish, qayd etish va dasturchilarga aniq bug-reportlar uzatish</li>
+                                <li data-i18n="exp1_l3">Har bir yangi versiyadan oldin regression sinovlarni o'tkazish</li>
+                                <li data-i18n="exp1_l4">Kassa moduli, cheklar va hisobotlarning to'g'riligini nazorat qilish</li>
+                                <li data-i18n="exp1_l5">Mobil va desktop versiyalarda cross-testing</li>
+                            </ul>
+                            <div class="t-tags">
+                                <span>Manual Testing</span><span>Test-Cases</span><span>Bug Reporting</span><span>Regression</span><span>POS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="t-item" data-reveal data-delay="100">
+                        <div class="t-dot-line"></div>
+                        <div class="t-card">
+                            <div class="t-head">
+                                <div class="t-company">
+                                    <span class="t-logo py"><i class="fa-brands fa-python"></i></span>
+                                    <div>
+                                        <h3 data-i18n="exp2_role">Web Dasturchi — shaxsiy loyihalar</h3>
+                                        <span class="t-place" data-i18n="exp2_place">Freelance / O'z loyihalarim</span>
+                                    </div>
+                                </div>
+                                <span class="t-badge">2024 — 2026</span>
+                            </div>
+                            <p class="t-desc" data-i18n="exp2_desc">
+                                Universitetga kirgan yilimdan boshlab web dasturlashni o'rganib, 10 dan ortiq loyiha va Telegram botlarni yaratdim. Ushbu tajriba menga tizimlarning ichki ishlashini chuqur tushunishni o'rgatdi.
+                            </p>
+                            <ul class="t-list">
+                                <li data-i18n="exp2_l1">darslon.uz — o'zbek tilidagi dasturlash darsliklari platformasi (10 modul, 423 darslik)</li>
+                                <li data-i18n="exp2_l2">Kitobxon — kitob taqrirlari platformasi</li>
+                                <li data-i18n="exp2_l3">Turli-tasodiflar — 12+ generatorli PWA platforma</li>
+                                <li data-i18n="exp2_l4">Python'da 3 ta Telegram bot (talaba_bot, avtoelon_bot, beauty_bot)</li>
+                            </ul>
+                            <div class="t-tags">
+                                <span>Python</span><span>Django</span><span>JavaScript</span><span>PostgreSQL</span><span>Git</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="t-item" data-reveal data-delay="150">
+                        <div class="t-dot-line"></div>
+                        <div class="t-card edu">
+                            <div class="t-head">
+                                <div class="t-company">
+                                    <span class="t-logo edu-logo"><i class="fa-solid fa-graduation-cap"></i></span>
+                                    <div>
+                                        <h3 data-i18n="exp3_role">TATU — Kompyuter injiniring</h3>
+                                        <span class="t-place" data-i18n="exp3_place">Muhammad al-Xorazmiy nomidagi TATU</span>
+                                    </div>
+                                </div>
+                                <span class="t-badge">2024 — hozirgacha</span>
+                            </div>
+                            <p class="t-desc" data-i18n="exp3_desc">
+                                Bakalavriat 3-kurs talabasi. Dasturlash, ma'lumotlar bazasi, tarmoqlar va kiberxavfsizlik asoslari bo'yicha akademik bilimlar.
+                            </p>
+                            <div class="t-tags">
+                                <span>C++</span><span>Algoritmlar</span><span>Oracle SQL</span><span>Tarmoqlar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SKILLS ============ -->
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag" data-i18n="skills_tag">// ko'nikmalar</span>
+                    <h2 class="section-title" data-i18n="skills_title">Mening <span class="grad-text">qurollarim</span></h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card featured" data-reveal>
+                        <div class="skill-card-head">
+                            <span class="skill-icon"><i class="fa-solid fa-vial-circle-check"></i></span>
+                            <h3 data-i18n="skills_qa_title">QA &amp; Testirovka</h3>
+                            <span class="core-badge" data-i18n="skills_core_badge">Asosiy yo'nalish</span>
+                        </div>
+                        <div class="chips">
+                            <span>Manual Testing</span><span>Automation (Playwright, Selenium)</span><span>pytest</span>
+                            <span>API Testing (Postman)</span><span>Jira</span><span>Test-Case Design</span><span>Bug Reporting</span>
+                            <span>Regression Testing</span><span>Smoke Testing</span><span>Exploratory Testing</span>
+                            <span>ISTQB Foundation</span><span>UI/UX Testing</span><span>Cross-Browser</span><span>SDLC / STLC</span><span>Agile / Scrum</span>
+                        </div>
+                    </div>
+                    <div class="skill-card" data-reveal data-delay="60">
+                        <div class="skill-card-head">
+                            <span class="skill-icon py"><i class="fa-brands fa-python"></i></span>
+                            <h3 data-i18n="skills_be_title">Backend</h3>
+                        </div>
+                        <div class="chips">
+                            <span>Python</span><span>Django</span><span>C++</span><span>Telegram Bot API</span>
+                        </div>
+                    </div>
+                    <div class="skill-card" data-reveal data-delay="120">
+                        <div class="skill-card-head">
+                            <span class="skill-icon fe"><i class="fa-solid fa-laptop-code"></i></span>
+                            <h3 data-i18n="skills_fe_title">Frontend</h3>
+                        </div>
+                        <div class="chips">
+                            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Responsive Design</span>
+                        </div>
+                    </div>
+                    <div class="skill-card" data-reveal data-delay="180">
+                        <div class="skill-card-head">
+                            <span class="skill-icon db"><i class="fa-solid fa-database"></i></span>
+                            <h3 data-i18n="skills_db_title">Ma'lumotlar bazasi</h3>
+                        </div>
+                        <div class="chips">
+                            <span>PostgreSQL</span><span>Oracle SQL</span><span>SQL so'rovlari</span>
+                        </div>
+                    </div>
+                    <div class="skill-card" data-reveal data-delay="240">
+                        <div class="skill-card-head">
+                            <span class="skill-icon tools"><i class="fa-solid fa-screwdriver-wrench"></i></span>
+                            <h3 data-i18n="skills_tools_title">Vositalar</h3>
+                        </div>
+                        <div class="chips">
+                            <span>Postman</span><span>Jira</span><span>Git</span><span>GitHub</span><span>Linux</span><span>Chrome DevTools</span>
+                        </div>
+                    </div>
+                    <div class="skill-card" data-reveal data-delay="300">
+                        <div class="skill-card-head">
+                            <span class="skill-icon sec"><i class="fa-solid fa-shield-halved"></i></span>
+                            <h3 data-i18n="skills_extra_title">Qo'shimcha</h3>
+                        </div>
+                        <div class="chips">
+                            <span>Kiberxavfsizlik asoslari</span><span>Kompyuter tarmoqlari</span><span>Ma'lumotlar tuzilmalari</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PROJECTS ============ -->
+        <section id="projects" class="section alt">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag" data-i18n="proj_tag">// loyihalar</span>
+                    <h2 class="section-title" data-i18n="proj_title">Ishlagan <span class="grad-text">loyihalarim</span></h2>
+                </div>
+                <div class="projects-grid">
+
+                    <article class="project-card work" data-reveal>
+                        <div class="project-top">
+                            <span class="project-emoji">🧾</span>
+                            <span class="project-flag" data-i18n="proj_biznex_flag">🟢 Hozir test qilyapman</span>
+                        </div>
+                        <h3>Biznex.uz</h3>
+                        <p class="project-role">QA Manual Tester @ DeepSpace</p>
+                        <p data-i18n="proj_biznex_desc">Kafe va restoranlar uchun to'liq POS tizim: kassa, ombor, oshxona ekrani, hisobotlar va soliq integratsiyasi. Tizim sifatini kafolatlayman.</p>
+                        <div class="t-tags">
+                            <span>QA</span><span>POS</span><span>Kassa</span><span>Ombor</span>
+                        </div>
+                        <a href="https://biznex.uz" target="_blank" rel="noopener" class="project-link">biznex.uz <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </article>
+
+                    <article class="project-card" data-reveal data-delay="60">
+                        <div class="project-top">
+                            <span class="project-emoji">🛡️</span>
+                            <span class="project-flag" data-i18n="proj_niex_flag">🌐 Web platforma</span>
+                        </div>
+                        <h3>NIEX AI</h3>
+                        <p class="project-role" data-i18n="proj_niex_role">Jamoaviy loyiha · QA &amp; Testing</p>
+                        <p data-i18n="proj_niex_desc">Xavfsiz kontent brauzer platformasi. Tizimning ishonchliligi, funksional sinovlari va QA jarayonlarida faol ishtirok etganman.</p>
+                        <div class="t-tags">
+                            <span>QA</span><span>Testing</span><span>Security</span><span>Jamoaviy</span>
+                        </div>
+                        <a href="https://niex.uz/" target="_blank" rel="noopener" class="project-link">niex.uz <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </article>
+
+                    <article class="project-card" data-reveal data-delay="90">
+                        <div class="project-top">
+                            <span class="project-emoji">🚖</span>
+                        </div>
+                        <h3>RIZO GO</h3>
+                        <p class="project-role">Django + Tailwind · Web platforma</p>
+                        <p data-i18n="proj_rizo_desc">Taksi va yetkazib berish xizmati platformasi. Python va Django arxitekturasi asosida qulay buyurtma berish tizimi.</p>
+                        <div class="t-tags">
+                            <span>Python</span><span>Django</span><span>Tailwind</span><span>Full-stack</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-reveal data-delay="120">
+                        <div class="project-top">
+                            <span class="project-emoji">📚</span>
+                            <span class="project-flag wip" data-i18n="proj_darslon_flag">🟡 Jarayonda</span>
+                        </div>
+                        <h3>darslon.uz</h3>
+                        <p class="project-role" data-i18n="proj_darslon_role">Ta'lim platformasi · Dasturlash</p>
+                        <p data-i18n="proj_darslon_desc">O'zbek tilidagi dasturlash darsliklari platformasi — 10 ta modul, 423 ta darslik. Yosh dasturchilar uchun to'liq o'quv resursi.</p>
+                        <div class="t-tags">
+                            <span>Web</span><span>Platforma</span><span>O'quv</span><span>Darslik</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="javascript:void(0)" onclick="showDarslonAlert(); return false;" class="project-link">darslon.uz <span class="badge-mini">Jarayonda</span> <i class="fa-solid fa-clock"></i></a>
+                            <a href="https://github.com/asilbek006/tutorial" target="_blank" rel="noopener" class="project-sublink"><i class="fa-brands fa-github"></i> GitHub</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-reveal data-delay="150">
+                        <div class="project-top">
+                            <span class="project-emoji">🎲</span>
+                            <span class="project-flag">⚡ PWA</span>
+                        </div>
+                        <h3>Turli-tasodiflar</h3>
+                        <p class="project-role">PWA · TypeScript</p>
+                        <p data-i18n="proj_turli_desc">12+ xil bepul tasodifiy generatorlar platformasi. 3 xil tilda, PWA sifatida o'rnatiladigan va Android'da ishlaydigan.</p>
+                        <div class="t-tags">
+                            <span>TypeScript</span><span>PWA</span><span>Android</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://turli-tasodiflar.vercel.app/uz/" target="_blank" rel="noopener" class="project-link">turli-tasodiflar.vercel.app <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/asilbek006/turli-tasodiflar" target="_blank" rel="noopener" class="project-sublink"><i class="fa-brands fa-github"></i> GitHub</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-reveal data-delay="180">
+                        <div class="project-top">
+                            <span class="project-emoji">📖</span>
+                            <span class="project-flag" data-i18n="proj_kitob_flag">🟢 Faol</span>
+                        </div>
+                        <h3>Kitobxon</h3>
+                        <p class="project-role">Web platforma</p>
+                        <p data-i18n="proj_kitob_desc">Kitobxonlar uchun kitob taqrirlari va almashinuv platformasi. Foydalanuvchilar kitoblar haqida fikr bildirishlari mumkin.</p>
+                        <div class="t-tags">
+                            <span>HTML/CSS</span><span>Web</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://kitobxonlik-sayti.vercel.app" target="_blank" rel="noopener" class="project-link">kitobxonlik-sayti <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/asilbek006/kitobxonlik-sayti" target="_blank" rel="noopener" class="project-sublink"><i class="fa-brands fa-github"></i> GitHub</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-reveal data-delay="240">
+                        <div class="project-top">
+                            <span class="project-emoji">🤖</span>
+                        </div>
+                        <h3>Telegram botlar</h3>
+                        <p class="project-role">Python · 3 ta bot</p>
+                        <p data-i18n="proj_bots_desc">talaba_bot — talabalar uchun, avtoelon_bot — avtomobil e'lonlari, beauty_bot — go'zallik saloni uchun yozilgan botlar.</p>
+                        <div class="t-tags">
+                            <span>Python</span><span>Bots</span><span>API</span>
+                        </div>
+                        <a href="https://github.com/asilbek006?tab=repositories" target="_blank" rel="noopener" class="project-link">GitHub <i class="fa-brands fa-github"></i></a>
+                    </article>
+
+                    <article class="project-card" data-reveal data-delay="300">
+                        <div class="project-top">
+                            <span class="project-emoji">📢</span>
+                        </div>
+                        <h3>PyCodingDev</h3>
+                        <p class="project-role">Telegram kanal · O'quv loyihasi</p>
+                        <p data-i18n="proj_channel_desc">Python va IT sohasi bo'yicha darslar, kod misollari va video tutoriallar kanali — hamjamiyat uchun bilim ulashaman.</p>
+                        <div class="t-tags">
+                            <span>Python</span><span>Teaching</span><span>Community</span>
+                        </div>
+                        <a href="https://t.me/PyCodingdev" target="_blank" rel="noopener" class="project-link"><span data-i18n="proj_btn_channel">Kanalga o'tish</span> <i class="fa-brands fa-telegram"></i></a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CONTACT ============ -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <span class="section-tag" data-i18n="contact_tag">// bog'lanish</span>
+                    <h2 class="section-title" data-i18n="contact_title">Keling, <span class="grad-text">gaplashamiz</span></h2>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-cards">
+                        <a href="mailto:dasilbek461@gmail.com" class="contact-card" data-reveal>
+                            <span class="c-icon" style="--c:#ea4335"><i class="fa-solid fa-envelope"></i></span>
+                            <div><strong>Email</strong><span>dasilbek461@gmail.com</span></div>
+                        </a>
+                        <a href="tel:+998904126880" class="contact-card" data-reveal data-delay="60">
+                            <span class="c-icon" style="--c:#34a853"><i class="fa-solid fa-phone"></i></span>
+                            <div><strong>Telefon</strong><span>+998 90 412 68 80</span></div>
+                        </a>
+                        <a href="https://t.me/Asilbek68_80" target="_blank" rel="noopener" class="contact-card" data-reveal data-delay="120">
+                            <span class="c-icon" style="--c:#229ed9"><i class="fa-brands fa-telegram"></i></span>
+                            <div><strong>Telegram</strong><span>@Asilbek68_80</span></div>
+                        </a>
+                        <a href="https://github.com/asilbek006" target="_blank" rel="noopener" class="contact-card" data-reveal data-delay="180">
+                            <span class="c-icon" style="--c:#8b5cf6"><i class="fa-brands fa-github"></i></span>
+                            <div><strong>GitHub</strong><span>github.com/asilbek006</span></div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/asilbek-davlatov-387408338" target="_blank" rel="noopener" class="contact-card" data-reveal data-delay="240">
+                            <span class="c-icon" style="--c:#0a66c2"><i class="fa-brands fa-linkedin-in"></i></span>
+                            <div><strong>LinkedIn</strong><span>asilbek-davlatov</span></div>
+                        </a>
+                        <div class="contact-card static" data-reveal data-delay="300">
+                            <span class="c-icon" style="--c:#f59e0b"><i class="fa-solid fa-location-dot"></i></span>
+                            <div><strong data-i18n="fact_loc_lbl">Manzil</strong><span data-i18n="fact_loc_val">Toshkent, O'zbekiston</span></div>
+                        </div>
+                    </div>
+                    <div class="channel-banner" data-reveal data-delay="150">
+                        <div class="channel-icon"><i class="fa-brands fa-telegram"></i></div>
+                        <h3>PyCodingDev</h3>
+                        <p data-i18n="contact_banner_p">Python va IT sohasi bo'yicha darslar, kod misollari va video tutoriallar. Yangi boshlovchilar uchun ham, tajribalilar uchun ham.</p>
+                        <div class="channel-features">
+                            <span><i class="fa-brands fa-python"></i> <span data-i18n="contact_banner_f1">Python darslari</span></span>
+                            <span><i class="fa-solid fa-code"></i> <span data-i18n="contact_banner_f2">Kod misollari</span></span>
+                            <span><i class="fa-solid fa-video"></i> <span data-i18n="contact_banner_f3">Video tutorialar</span></span>
+                        </div>
+                        <a href="https://t.me/PyCodingdev" target="_blank" rel="noopener" class="btn btn-primary">
+                            <i class="fa-brands fa-telegram"></i> <span data-i18n="contact_banner_btn">Kanalga obuna bo'lish</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <a href="#home" class="logo">
+                <span class="logo-mark">DA</span>
+                <span class="logo-text">Davlatov<em>.uz</em></span>
+            </a>
+            <p class="footer-quote" data-i18n="footer_quote">"Sifat — tasodif emas, bu sinov natijasidir." 🐞</p>
+            <div class="footer-socials">
+                <a href="https://www.linkedin.com/in/asilbek-davlatov-387408338" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://t.me/Asilbek68_80" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://github.com/asilbek006" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:dasilbek461@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <p class="footer-copy">© <span id="year">2026</span> <span data-i18n="footer_copy">Davlatov Asilbek · Barcha huquqlar himoyalangan</span></p>
+        </div>
+    </footer>
+
+    <button class="back-top" id="backTop" aria-label="Yuqoriga"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
