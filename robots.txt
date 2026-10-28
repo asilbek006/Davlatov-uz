@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://davlatov-uz.vercel.app/sitemap.xml
