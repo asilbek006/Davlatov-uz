@@ -7,7 +7,7 @@ Keyingi sessiyalarda agent ushbu faylni oʻqib, loyihaning butun tarixini 1 soni
 
 ## 📌 Asosiy Maʼlumotlar
 * **Loyiha egasi:** Davlatov Asilbek
-* **Kasb:** QA Manual Tester (DeepSpace — Biznex.uz, 5 oylik tajriba) | Python Backend Developer
+* **Kasb:** QA Manual Tester | Python Backend Developer (3+ yillik IT tajribasi, 5 oylik amaliy QA tajribasi)
 * **Taʼlim:** TATU — Kompyuter injiniring (3-kurs talabasi)
 * **Mahalliy yoʻl (Workspace):** `/home/asilbek/.zcode/workspace/default/davlatov-portfolio/`
 * **Jonli sayt manzili:** [https://davlatov-uz.vercel.app](https://davlatov-uz.vercel.app)
